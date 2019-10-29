@@ -313,7 +313,7 @@ const Footer: React.SFC<IFooterProps> = props => {
                 <Enter onClick={handleScorllBottom} />
               </Tooltip>
               <Divider type="vertical" />
-              <Close onClick={hideLogPanel} />
+              <Close onClick={hideShellPanel} />
             </div>
           </div>
         }
