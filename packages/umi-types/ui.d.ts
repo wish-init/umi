@@ -113,7 +113,7 @@ declare namespace IUI {
     sections: Array<{
       key?: string;
       title: string;
-      icon: string | React.ReactNode;
+      icon: string | ReactNode;
       description: string;
       component: FunctionComponent<any>;
     }>;
@@ -123,7 +123,7 @@ declare namespace IUI {
 
   interface ITerminalProps {
     /** Terminal title */
-    title?: React.ReactNode;
+    title?: ReactNode;
     className?: string;
     terminalClassName?: string;
     /** defaultValue in Terminal */
