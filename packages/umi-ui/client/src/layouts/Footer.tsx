@@ -10,11 +10,12 @@ import {
   Tag as TagIcon,
   QuestionCircle,
   Message,
+  Code,
 } from '@ant-design/icons';
+import { formatMessage } from 'umi-plugin-react/locale';
 import cls from 'classnames';
 import history from '@tmp/history';
 import { LOCALES, LOCALES_ICON } from '@/enums';
-import intl from '@/utils/intl';
 import Context from '@/layouts/Context';
 import Logs from '@/components/Logs';
 import FooterToolbar from './FooterToolbar';
@@ -86,9 +87,9 @@ const Footer: React.SFC<IFooterProps> = props => {
     if (p) {
       try {
         copy(p || '');
-        message.success(intl({ id: 'org.umi.ui.global.copy.success' }));
+        message.success(formatMessage({ id: 'org.umi.ui.global.copy.success' }));
       } catch (e) {
-        message.error(intl({ id: 'org.umi.ui.global.copy.failure' }));
+        message.error(formatMessage({ id: 'org.umi.ui.global.copy.failure' }));
       }
     }
   };
@@ -156,7 +157,7 @@ const Footer: React.SFC<IFooterProps> = props => {
     try {
       await clearLog();
     } catch (e) {
-      message.error(intl({ id: 'org.umi.ui.global.log.clear.error' }));
+      message.error(formatMessage({ id: 'org.umi.ui.global.log.clear.error' }));
     } finally {
       await getLogs();
     }
@@ -252,7 +253,7 @@ const Footer: React.SFC<IFooterProps> = props => {
             }}
             className={actionCls}
           >
-            <Tooltip title={intl({ id: 'org.umi.ui.global.home' })}>
+            <Tooltip title={formatMessage({ id: 'org.umi.ui.global.home' })}>
               <HomeFilled style={{ marginRight: 4 }} />
             </Tooltip>
           </div>
@@ -265,11 +266,12 @@ const Footer: React.SFC<IFooterProps> = props => {
           </>
         )}
         <div onClick={() => togglePanel('log')} className={logCls}>
-          <ProfileFilled style={{ marginRight: 4 }} /> {intl({ id: 'org.umi.ui.global.log' })}
+          <ProfileFilled style={{ marginRight: 4 }} />{' '}
+          {formatMessage({ id: 'org.umi.ui.global.log' })}
         </div>
 
         <div className={shellCls} onClick={() => togglePanel('terminal')}>
-          打开终端
+          <Code style={{ marginRight: 4 }} /> {formatMessage({ id: 'org.umi.ui.global.terminal' })}
         </div>
 
         <div className={styles.section}>
@@ -295,8 +297,8 @@ const Footer: React.SFC<IFooterProps> = props => {
             <a>
               <Message style={{ marginRight: 4 }} />{' '}
               {type === 'loading'
-                ? intl({ id: 'org.umi.ui.global.feedback' })
-                : intl({ id: 'org.umi.ui.global.feedback' })}
+                ? formatMessage({ id: 'org.umi.ui.global.feedback' })
+                : formatMessage({ id: 'org.umi.ui.global.feedback' })}
             </a>
           </Popover>
         </div>
@@ -304,7 +306,7 @@ const Footer: React.SFC<IFooterProps> = props => {
         {FOOTER_RIGHT.map((item, i) => (
           <div className={styles.section} key={i.toString()}>
             <a href={item.href} target="_blank" rel="noopener noreferrer">
-              {item.icon} {intl({ id: item.title })}
+              {item.icon} {formatMessage({ id: item.title })}
             </a>
           </div>
         ))}
