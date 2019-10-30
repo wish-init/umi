@@ -14,6 +14,7 @@ import rimraf from 'rimraf';
 import portfinder from 'portfinder';
 import resolveFrom from 'resolve-from';
 import semver from 'semver';
+import get from 'lodash/get';
 import Config from './Config';
 import getClientScript from './getClientScript';
 import listDirectory from './listDirectory';
@@ -843,6 +844,11 @@ export default class UmiUI {
       });
 
       app.use('/*', async (req, res) => {
+        const { currentProject, projectsByKey } = this.config.data;
+        const currentProjectCwd = get(projectsByKey, `${currentProject}.path`);
+        initTerminal(this.server, {
+          cwd: currentProjectCwd || this.cwd,
+        });
         const scripts = await getScripts();
         if (process.env.LOCAL_DEBUG) {
           try {
@@ -1016,9 +1022,6 @@ export default class UmiUI {
             process.send(message);
           }
         }
-      });
-      initTerminal(server, {
-        cwd: this.cwd,
       });
       ss.installHandlers(server, {
         prefix: '/umiui',
